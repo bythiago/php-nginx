@@ -1,0 +1,21 @@
+version: "3"
+services:
+  nginx:
+    build: ./nginx
+    ports: 
+      - "80:80"
+    networks:
+      - internal
+    volumes:
+      - ./app:/var/www/html/
+  php:
+    build:
+      context: ./php
+      target: builder
+    networks:
+      - internal
+    volumes:
+      - ./app:/var/www/html/
+networks:
+  internal:
+    driver: bridge
